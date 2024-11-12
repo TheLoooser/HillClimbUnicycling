@@ -1,9 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
-using UnityEngine.U2D;
 
 public class TriggerScript : MonoBehaviour
 {
@@ -36,14 +32,21 @@ public class TriggerScript : MonoBehaviour
         */
         transform.position = new UnityEngine.Vector3(0,0,0);
 
-        SpriteShapeController ssc = ground1.GetComponent<SpriteShapeController>();
-        Debug.Log(ssc.spline.GetPosition(ssc.spline.GetPointCount() - 3));
-
         if (triggerIsActive)
         {
             triggerIsActive = false;
             StartCoroutine(Pause());  // Ensure that the ground is shifted only once per trigger
-            ground.transform.position += new UnityEngine.Vector3(38*2,0,0);
+
+            int length = 2*(ground1.GetComponent<EnvironmentGenerator>()._levelLength - 1);
+            float end = 2*(ground.GetComponent<EnvironmentGenerator>()._levelLength - 1) + ground.transform.position.x;
+            ground.transform.position += new UnityEngine.Vector3(end + length, 0, 0);
+
+            ground.GetComponent<EnvironmentGenerator>()._noiseStep = 0.4f;
+            ground.GetComponent<EnvironmentGenerator>()._levelLength = 25;
+
+            ground.GetComponent<EnvironmentGenerator>()._isEnd = true;
+            ground1.GetComponent<EnvironmentGenerator>()._isEnd= false;
+            // ssc.BakeCollider();
         }
     }
 
