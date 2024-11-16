@@ -9,7 +9,7 @@ public class EnvironmentGenerator : MonoBehaviour
 
 
     [SerializeField, Range(3f, 100f)] public int _levelLength = 50;
-    [SerializeField, Range(1f, 50f)] private float _xMultiplier = 2f;
+    [SerializeField, Range(1f, 50f)] public float _xMultiplier = 2f;
     [SerializeField, Range(1f, 50f)] private float _yMultiplier = 2f;
     [SerializeField, Range(0f, 1f)] private float _curveSmoothness = 0.5f;
     [SerializeField] public float _noiseStep = 0.5f;
@@ -57,7 +57,7 @@ public class EnvironmentGenerator : MonoBehaviour
             _lastPos = new UnityEngine.Vector3(i * _xMultiplier, Mathf.PerlinNoise(0, i * _noiseStep) * _yMultiplier);
             _spriteShapeController.spline.InsertPointAt(i, _lastPos);
 
-            if (i != 0 && i != _levelLength - 1)
+            if (i != _levelLength - 1)
             {
                 _spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
                 _spriteShapeController.spline.SetLeftTangent(i, _curveSmoothness * _xMultiplier * UnityEngine.Vector3.left);
