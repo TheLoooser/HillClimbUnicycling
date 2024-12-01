@@ -23,7 +23,7 @@ public class DriveUnicycle : MonoBehaviour
         _moveInput = Input.GetAxisRaw("Horizontal");
 
         Vector2 forward = transform.TransformDirection(Vector2.right) * 10;
-        Debug.DrawRay(transform.position, forward, Color.green);
+        // Debug.DrawRay(transform.position, forward, Color.green);
 
     }
 
@@ -32,12 +32,12 @@ public class DriveUnicycle : MonoBehaviour
         _tireRB.AddTorque(-_moveInput * _speed * Time.fixedDeltaTime);
 
         hit = Physics2D.Raycast(raycastPoint.position, Vector2.down);
-        Debug.Log(hit.transform);
-        Debug.Log(hit.collider);
-        Debug.Log(hit.distance);
+        // Debug.Log(hit.transform);
+        // Debug.Log(hit.collider);
+        // Debug.Log(hit.distance);
 
         transform.position = new Vector2(transform.position.x, transform.position.y - hit.distance + 1.02f);
-        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, 0), transform.TransformDirection(Vector2.down) * 10, Color.yellow);
+        // Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, 0), transform.TransformDirection(Vector2.down) * 10, Color.yellow);
         
     }
 }
