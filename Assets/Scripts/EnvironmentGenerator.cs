@@ -27,6 +27,12 @@ public class EnvironmentGenerator : MonoBehaviour
             _lastPos = transform.position + new UnityEngine.Vector3(i * _xMultiplier, Mathf.PerlinNoise(0, i * _noiseStep) * _yMultiplier);
             _spriteShapeController.spline.InsertPointAt(i, _lastPos);
 
+            // if (i == 0) 
+            // {
+            //     _spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Broken);
+            //     _spriteShapeController.spline.SetLeftTangent(i,  _curveSmoothness * _xMultiplier* UnityEngine.Vector3.down);
+            // }
+
             if (i != 0 && i != _levelLength - 1)
             {
                 _spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
@@ -71,7 +77,9 @@ public class EnvironmentGenerator : MonoBehaviour
         if(_isEnd){
             UnityEngine.Vector3 pos = _otherSpriteShapeController.spline.GetPosition(_otherSpriteShapeController.spline.GetPointCount() - 3);
             _spriteShapeController.spline.SetPosition(0, new UnityEngine.Vector3(0, pos.y, 0));
-            
+
+            _spriteShapeController.spline.SetTangentMode(0, ShapeTangentMode.Broken);
+            _spriteShapeController.spline.SetLeftTangent(0, _curveSmoothness * _xMultiplier* UnityEngine.Vector3.down);    
         }
     }
 }
