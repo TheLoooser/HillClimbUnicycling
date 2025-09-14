@@ -53,9 +53,7 @@ public class TriggerScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         /*TODO:
-        fix unsmooth ground transitions
-        make trigger invis
-        randomise ground objects upon moving
+        make ground trigger invis
         */
 
         if (triggerIsActive)
