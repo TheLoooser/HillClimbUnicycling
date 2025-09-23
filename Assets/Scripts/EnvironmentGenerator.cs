@@ -27,12 +27,6 @@ public class EnvironmentGenerator : MonoBehaviour
             _lastPos = transform.position + new UnityEngine.Vector3(i * _xMultiplier, Mathf.PerlinNoise(0, i * _noiseStep) * _yMultiplier);
             _spriteShapeController.spline.InsertPointAt(i, _lastPos);
 
-            // if (i == 0) 
-            // {
-            //     _spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Broken);
-            //     _spriteShapeController.spline.SetLeftTangent(i,  _curveSmoothness * _xMultiplier* UnityEngine.Vector3.down);
-            // }
-
             if (i != 0 && i != _levelLength - 1)
             {
                 _spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
