@@ -16,7 +16,7 @@ public class EnvironmentGenerator : MonoBehaviour
     [SerializeField] private float _bottom = 10f;
     [SerializeField] public bool _isEnd = false;
 
-    private UnityEngine.Vector3 _lastPos;
+    private Vector3 _lastPos;
 
     private void OnValidate()
     {
@@ -24,23 +24,21 @@ public class EnvironmentGenerator : MonoBehaviour
 
         for (int i = 0; i < _levelLength; i++)
         {
-            _lastPos = transform.position + new UnityEngine.Vector3(i * _xMultiplier, Mathf.PerlinNoise(0, i * _noiseStep) * _yMultiplier);
+            _lastPos = transform.position + new Vector3(i * _xMultiplier, Mathf.PerlinNoise(0, i * _noiseStep) * _yMultiplier);
             _spriteShapeController.spline.InsertPointAt(i, _lastPos);
 
             if (i != 0 && i != _levelLength - 1)
             {
                 _spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
-                _spriteShapeController.spline.SetLeftTangent(i, _curveSmoothness * _xMultiplier * UnityEngine.Vector3.left);
-                _spriteShapeController.spline.SetRightTangent(i, _curveSmoothness * _xMultiplier * UnityEngine.Vector3.right);
+                _spriteShapeController.spline.SetLeftTangent(i, _curveSmoothness * _xMultiplier * Vector3.left);
+                _spriteShapeController.spline.SetRightTangent(i, _curveSmoothness * _xMultiplier * Vector3.right);
             }
         }
 
-        _spriteShapeController.spline.InsertPointAt(_levelLength, new UnityEngine.Vector3(_lastPos.x, transform.position.y - _bottom));
+        _spriteShapeController.spline.InsertPointAt(_levelLength, new Vector3(_lastPos.x, transform.position.y - _bottom));
 
-        _spriteShapeController.spline.InsertPointAt(_levelLength + 1, new UnityEngine.Vector3(transform.position.x, transform.position.y - _bottom));
+        _spriteShapeController.spline.InsertPointAt(_levelLength + 1, new Vector3(transform.position.x, transform.position.y - _bottom));
     }
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -54,26 +52,26 @@ public class EnvironmentGenerator : MonoBehaviour
 
         for (int i = 0; i < _levelLength; i++)
         {
-            _lastPos = new UnityEngine.Vector3(i * _xMultiplier, Mathf.PerlinNoise(0, i * _noiseStep) * _yMultiplier);
+            _lastPos = new Vector3(i * _xMultiplier, Mathf.PerlinNoise(0, i * _noiseStep) * _yMultiplier);
             _spriteShapeController.spline.InsertPointAt(i, _lastPos);
 
             if (i != _levelLength - 1)
             {
                 _spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
-                _spriteShapeController.spline.SetLeftTangent(i, _curveSmoothness * _xMultiplier * UnityEngine.Vector3.left);
-                _spriteShapeController.spline.SetRightTangent(i, _curveSmoothness * _xMultiplier * UnityEngine.Vector3.right);
+                _spriteShapeController.spline.SetLeftTangent(i, _curveSmoothness * _xMultiplier * Vector3.left);
+                _spriteShapeController.spline.SetRightTangent(i, _curveSmoothness * _xMultiplier * Vector3.right);
             }
         }
 
-        _spriteShapeController.spline.InsertPointAt(_levelLength, new UnityEngine.Vector3(_lastPos.x, 0 - _bottom));
-        _spriteShapeController.spline.InsertPointAt(_levelLength + 1, new UnityEngine.Vector3(0, 0 - _bottom));
+        _spriteShapeController.spline.InsertPointAt(_levelLength, new Vector3(_lastPos.x, 0 - _bottom));
+        _spriteShapeController.spline.InsertPointAt(_levelLength + 1, new Vector3(0, 0 - _bottom));
 
         if(_isEnd){
-            UnityEngine.Vector3 pos = _otherSpriteShapeController.spline.GetPosition(_otherSpriteShapeController.spline.GetPointCount() - 3);
-            _spriteShapeController.spline.SetPosition(0, new UnityEngine.Vector3(0, pos.y, 0));
+            Vector3 pos = _otherSpriteShapeController.spline.GetPosition(_otherSpriteShapeController.spline.GetPointCount() - 3);
+            _spriteShapeController.spline.SetPosition(0, new Vector3(0, pos.y, 0));
 
             _spriteShapeController.spline.SetTangentMode(0, ShapeTangentMode.Broken);
-            _spriteShapeController.spline.SetLeftTangent(0, _curveSmoothness * _xMultiplier* UnityEngine.Vector3.down);    
+            _spriteShapeController.spline.SetLeftTangent(0, _curveSmoothness * _xMultiplier* Vector3.down);    
         }
     }
 }

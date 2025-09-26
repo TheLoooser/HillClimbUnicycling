@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderScript : MonoBehaviour
+public class ConstantSliderScript : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
     [SerializeField] private TextMeshProUGUI _sliderText;
@@ -15,13 +15,7 @@ public class SliderScript : MonoBehaviour
         prevValue = _slider.value;
         _slider.onValueChanged.AddListener((v) =>
         {
-            _sliderText.text = v.ToString("0");
-            Vector3 sliderLabelposition = _sliderText.GetComponent<RectTransform>().localPosition;
-            _sliderText.GetComponent<RectTransform>().localPosition = new Vector3(
-                sliderLabelposition.x + (v - prevValue) * 2,
-                sliderLabelposition.y,
-                sliderLabelposition.z
-                );
+            _sliderText.text = v.ToString("0.00");
         });
     }
 

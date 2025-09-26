@@ -25,8 +25,17 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        speed = (unicycle.gameObject.transform.position - lastPosition).magnitude;
+        Vector3 movingDirection = unicycle.gameObject.transform.position - lastPosition;
+        speed = movingDirection.magnitude * 100;
         lastPosition = unicycle.gameObject.transform.position;
-        text.text = (Math.Floor(speed * 10000) / 100).ToString();
+
+        float dotProduct = Vector3.Dot(movingDirection, transform.right);
+
+        if (dotProduct < 0.01f) // Use a small tolerance for floating point comparisons
+        {
+            speed *= -1;
+        }
+        
+        text.text = (Math.Floor(speed * 100) / 100).ToString();
     }
 }

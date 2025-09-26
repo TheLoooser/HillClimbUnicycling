@@ -39,9 +39,6 @@ public class TriggerScript : MonoBehaviour
         float end = env1.transform.position.x;
         left.transform.position = new Vector3(end + length, 0, 0);
 
-        // env._noiseStep = 0.4f;
-        // env._levelLength = 25;
-
         env._isEnd = !env._isEnd;
         env1._isEnd = !env1._isEnd;
 
@@ -52,10 +49,6 @@ public class TriggerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        /*TODO:
-        make ground trigger invis
-        */
-
         if (triggerIsActive)
         {
             triggerIsActive = false;
